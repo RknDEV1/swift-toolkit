@@ -2,32 +2,40 @@ import Foundation
 
 public enum Validator {
 
+    /// Basic email format validation.
     public static func isValidEmail(_ email: String) -> Bool {
+        let trimmed = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return false }
+
         let pattern = "^[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
-        return email.range(of: pattern, options: .regularExpression) != nil
+        return trimmed.range(of: pattern, options: .regularExpression) != nil
     }
 
+    /// Validates a Brazilian CPF (with or without punctuation).
     public static func isValidCPF(_ cpf: String) -> Bool {
         let numbers = cpf.compactMap { Int(String($0)) }
         guard numbers.count == 11 else { return false }
 
-        // Reject known invalid sequences
+        // Reject sequences like 00000000000, 11111111111, etc.
         if Set(numbers).count == 1 { return false }
 
-        func digit(from slice: ArraySlice<Int>, factor: Int) -> Int {
+        func checkDigit(from digits: [Int], factor: Int) -> Int {
             var sum = 0
-            var f = factor
-            for n in slice {
-                sum += n * f
-                f -= 1
+            var currentFactor = factor
+            for digit in digits {
+                sum += digit * currentFactor
+                currentFactor -= 1
             }
-            let mod = (sum * 10) % 11
-            return mod == 10 ? 0 : mod
+            let remainder = (sum * 10) % 11
+            return remainder == 10 ? 0 : remainder
         }
 
-        let d1 = digit(from: numbers[0..<9], factor: 10)
-        let d2 = digit(from: numbers[0..<10], factor: 11)
+        let firstNine = Array(numbers[0..<9])
+        let d1 = checkDigit(from: firstNine, factor: 10)
+        guard d1 == numbers[9] else { return false }
 
-        return d1 == numbers[9] && d2 == numbers[10]
+        let firstTen = Array(numbers[0..<10])
+        let d2 = checkDigit(from: firstTen, factor: 11)
+        return d2 == numbers[10]
     }
 }
