@@ -15,8 +15,8 @@ A clean and focused collection of reusable **Swift** and **SwiftUI** utilities f
 
 ## Requirements
 
-- iOS 16+
-- macOS 13+
+- iOS 17+
+- macOS 14+
 - Swift 5.9+
 - Xcode 15+
 
@@ -68,7 +68,7 @@ let settings: Settings? = defaults.value(forKey: "settings")
 
 ```swift
 Validator.isValidEmail("user@example.com") // true
-Validator.isValidCPF("123.456.789-09")     // false (example)
+Validator.isValidCPF("12345678909")        // validates check digits
 ```
 
 ### SwiftUI Components
