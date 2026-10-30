@@ -10,8 +10,10 @@ A clean and focused collection of reusable **Swift** and **SwiftUI** utilities f
 - Type-safe `UserDefaults`
 - Secure Keychain helper
 - Email and CPF validators
-- Reusable SwiftUI components (`LoadingView`, `EmptyStateView`)
-- Fully compatible with Swift Package Manager
+- Date and number formatters (pt-BR)
+- Haptic feedback helpers
+- Lightweight network client
+- Reusable SwiftUI components and View extensions
 
 ## Requirements
 
@@ -30,68 +32,53 @@ dependencies: [
 ]
 ```
 
-Or add it directly in Xcode:
-
-1. File → Add Package Dependencies…
-2. Paste `https://github.com/RknDEV1/swift-toolkit.git`
-
 ## Usage Examples
 
-### String Extensions
+### Formatters
 
 ```swift
-"  hello  ".trimmed          // "hello"
-"".isBlank                   // true
+Formatters.currency(19.90)                 // "R$ 19,90"
+Formatters.currency(fromCentavos: 1990)    // "R$ 19,90"
+Date().formatted()                         // data no padrão pt-BR
+Date().relativeFormatted()                 // "há 2 horas"
+```
+
+### Haptics
+
+```swift
+Haptic.success()
+Haptic.light()
+Haptic.error()
+```
+
+### Network
+
+```swift
+let client = NetworkClient()
+let data: MyModel = try await client.get("https://api.example.com/data")
 ```
 
 ### Keychain
 
 ```swift
-try KeychainHelper.save("secret", forKey: "token")
-let token = try KeychainHelper.load(forKey: "token")
-try KeychainHelper.delete(forKey: "token")
+try KeychainHelper.save("token", forKey: "auth")
+let token = try KeychainHelper.load(forKey: "auth")
 ```
 
-### Typed UserDefaults
-
-```swift
-struct Settings: Codable {
-    var theme: String
-}
-
-let defaults = TypedUserDefaults()
-defaults.set(Settings(theme: "dark"), forKey: "settings")
-let settings: Settings? = defaults.value(forKey: "settings")
-```
-
-### Validators
-
-```swift
-Validator.isValidEmail("user@example.com") // true
-Validator.isValidCPF("12345678909")        // validates check digits
-```
-
-### SwiftUI Components
+### SwiftUI
 
 ```swift
 LoadingView(message: "Carregando...")
-
-EmptyStateView(
-    title: "Nenhum item",
-    systemImage: "tray",
-    description: "Adicione algo para começar."
-)
+EmptyStateView(title: "Nada por aqui", systemImage: "tray")
 ```
 
-## Project Structure
+## Structure
 
 ```
 Sources/SwiftToolkit/
 ├── Extensions/
 ├── Utilities/
 └── Components/
-Tests/
-└── SwiftToolkitTests/
 ```
 
 ## License
