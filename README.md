@@ -199,6 +199,12 @@ Sources/SwiftToolkit/
 
 ---
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for release history.
+
+---
+
 ## License
 
 This project is released under the **MIT License**. See [LICENSE](LICENSE) for details.
