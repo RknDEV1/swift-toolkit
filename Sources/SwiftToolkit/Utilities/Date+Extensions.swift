@@ -1,1 +1,2 @@
-// Moved to Extensions/Date+Extensions.swift
+// This file was intentionally left empty.
+// Date extensions live in Extensions/Date+Extensions.swift

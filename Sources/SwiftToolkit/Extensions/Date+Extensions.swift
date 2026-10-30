@@ -3,7 +3,7 @@ import Foundation
 public extension Date {
 
     /// Formats the date using Brazilian Portuguese locale by default.
-    func formatted(
+    func brFormatted(
         dateStyle: DateFormatter.Style = .medium,
         timeStyle: DateFormatter.Style = .short,
         locale: Locale = Locale(identifier: "pt_BR")
