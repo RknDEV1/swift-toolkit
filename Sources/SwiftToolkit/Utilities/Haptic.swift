@@ -1,6 +1,9 @@
+import Foundation
+
+#if canImport(UIKit)
 import UIKit
 
-/// Simple haptic feedback helper.
+/// Simple haptic feedback helper (iOS only).
 @MainActor
 public enum Haptic {
 
@@ -32,3 +35,4 @@ public enum Haptic {
         UISelectionFeedbackGenerator().selectionChanged()
     }
 }
+#endif
