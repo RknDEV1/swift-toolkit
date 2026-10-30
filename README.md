@@ -1,28 +1,28 @@
 # Swift Toolkit
 
-A clean and focused collection of reusable **Swift** and **SwiftUI** utilities for native iOS development.
+Coleção limpa e focada de utilitários reutilizáveis em **Swift** e **SwiftUI** para desenvolvimento nativo iOS.
 
 [![CI](https://github.com/RknDEV1/swift-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/RknDEV1/swift-toolkit/actions/workflows/ci.yml)
 
-## Features
+## Funcionalidades
 
-- String and Optional extensions
-- Type-safe `UserDefaults`
-- Secure Keychain helper
-- Email and CPF validators
-- Date and number formatters (pt-BR)
-- Haptic feedback helpers
-- Lightweight network client
-- Reusable SwiftUI components and View extensions
+- Extensões de String e Optional
+- `UserDefaults` tipado
+- Helper seguro de Keychain
+- Validadores de e-mail e CPF
+- Formatadores de data e números (pt-BR)
+- Feedback tátil (Haptics)
+- Cliente de rede leve
+- Componentes e extensões SwiftUI reutilizáveis
 
-## Requirements
+## Requisitos
 
 - iOS 17+
 - macOS 14+
 - Swift 5.9+
 - Xcode 15+
 
-## Installation
+## Instalação
 
 ### Swift Package Manager
 
@@ -32,9 +32,9 @@ dependencies: [
 ]
 ```
 
-## Usage Examples
+## Exemplos de Uso
 
-### Formatters
+### Formatadores
 
 ```swift
 Formatters.currency(19.90)                 // "R$ 19,90"
@@ -51,7 +51,7 @@ Haptic.light()
 Haptic.error()
 ```
 
-### Network
+### Rede
 
 ```swift
 let client = NetworkClient()
@@ -72,7 +72,7 @@ LoadingView(message: "Carregando...")
 EmptyStateView(title: "Nada por aqui", systemImage: "tray")
 ```
 
-## Structure
+## Estrutura
 
 ```
 Sources/SwiftToolkit/
@@ -81,6 +81,14 @@ Sources/SwiftToolkit/
 └── Components/
 ```
 
-## License
+## Licença
 
 MIT License
+
+---
+
+# Swift Toolkit (English)
+
+A clean and focused collection of reusable **Swift** and **SwiftUI** utilities for native iOS development.
+
+See the sections above for features, requirements, installation and usage examples.
