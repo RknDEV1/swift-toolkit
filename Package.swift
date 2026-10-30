@@ -16,7 +16,10 @@ let package = Package(
     targets: [
         .target(
             name: "SwiftToolkit",
-            path: "Sources/SwiftToolkit"
+            path: "Sources/SwiftToolkit",
+            exclude: [
+                "Utilities/Date+Extensions.swift"
+            ]
         ),
         .testTarget(
             name: "SwiftToolkitTests",
