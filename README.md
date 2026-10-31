@@ -1,13 +1,13 @@
 # Swift Toolkit
 
-A clean and focused collection of reusable **Swift** and **SwiftUI** utilities for native iOS development.
+A clean collection of reusable **Swift** and **SwiftUI** utilities for native iOS apps.
 
 [![CI](https://github.com/RknDEV1/swift-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/RknDEV1/swift-toolkit/actions/workflows/ci.yml)
 [![Swift](https://img.shields.io/badge/Swift-5.9+-orange.svg)](https://swift.org)
 [![Platform](https://img.shields.io/badge/Platform-iOS%2017%2B%20%7C%20macOS%2014%2B-blue.svg)](https://developer.apple.com)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-> Also available in Portuguese: [README.pt-BR.md](README.pt-BR.md)
+> Portuguese: [README.pt-BR.md](README.pt-BR.md)
 
 ---
 
@@ -15,13 +15,13 @@ A clean and focused collection of reusable **Swift** and **SwiftUI** utilities f
 
 | Category | Utilities |
 |----------|-----------|
-| **Storage** | Secure Keychain helper, Type-safe UserDefaults |
-| **Validation** | Email and Brazilian CPF validators |
+| **Storage** | Keychain, type-safe UserDefaults |
+| **Validation** | Email and Brazilian CPF |
 | **Formatting** | Currency (BRL), numbers, dates (pt-BR) |
-| **Networking** | Lightweight async/await network client |
-| **Feedback** | Haptic feedback helpers (iOS only) |
+| **Networking** | Lightweight async/await client |
+| **Feedback** | Haptics (iOS only) |
+| **Helpers** | Debouncer, Bundle version, safe array index |
 | **SwiftUI** | LoadingView, EmptyStateView, View extensions |
-| **Extensions** | String, Optional, Date helpers |
 
 ---
 
@@ -37,68 +37,49 @@ A clean and focused collection of reusable **Swift** and **SwiftUI** utilities f
 ## Installation
 
 ```swift
-dependencies: [
-    .package(url: "https://github.com/RknDEV1/swift-toolkit.git", from: "0.1.0")
-]
+.package(url: "https://github.com/RknDEV1/swift-toolkit.git", branch: "main")
 ```
+
+Or in Xcode: **File → Add Package Dependencies…** → paste the URL → branch **main**.
 
 ---
 
 ## Usage
 
-### String & Optional
-
-```swift
-"  hello  ".trimmed
-"".isBlank
-```
-
-### Keychain
-
-```swift
-try KeychainHelper.save("token", forKey: "auth")
-let token = try KeychainHelper.load(forKey: "auth")
-```
-
-### Validators
-
-```swift
-Validator.isValidEmail("user@example.com")
-Validator.isValidCPF("390.533.447-05")
-```
-
-### Formatters
-
 ```swift
 Formatters.currency(19.90)
-Formatters.currency(fromCentavos: 1990)
 Date().brFormatted()
-Date().relativeFormatted()
-```
+Validator.isValidEmail("user@example.com")
 
-### Haptics (iOS only)
+try KeychainHelper.save("token", forKey: "auth")
 
-```swift
-Haptic.success()
-Haptic.error()
-```
+let debouncer = Debouncer(delay: 0.4)
+debouncer.schedule { /* delayed work */ }
 
-### Network
+let value = items[safe: 2]
+Bundle.main.versionLabel
 
-```swift
-let client = NetworkClient()
-let data: MyModel = try await client.get("https://api.example.com/data")
-```
-
-### SwiftUI
-
-```swift
 LoadingView(message: "Loading...")
-EmptyStateView(title: "No items", systemImage: "tray")
+EmptyStateView(title: "No data", systemImage: "tray")
 ```
 
 ---
 
+## Structure
+
+```
+Sources/SwiftToolkit/
+├── Extensions/
+├── Utilities/
+└── Components/
+```
+
+---
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
+
 ## License
 
-MIT License
+MIT — see [LICENSE](LICENSE).
