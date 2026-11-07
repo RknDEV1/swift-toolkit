@@ -8,13 +8,14 @@ Reusable **Swift** utilities for native iOS apps.
 
 > Portuguese: [README.pt-BR.md](README.pt-BR.md)
 
-Part of the [RknDEV1](https://github.com/RknDEV1) toolkit stack, used by [swift-ui-kit](https://github.com/RknDEV1/swift-ui-kit) demos and [aju-util](https://github.com/RknDEV1/aju-util).
+Part of the [RknDEV1](https://github.com/RknDEV1) toolkit stack.
 
 ## Features
 
 | Area | APIs |
 |------|------|
-| Storage | Keychain, type-safe UserDefaults |
+| **Secure Storage** | Keychain, biometric-protected Keychain |
+| **Biometrics** | Face ID / Touch ID authentication |
 | Validation | Email, Brazilian CPF |
 | Formatting | BRL currency, numbers, dates (pt-BR) |
 | Network | Lightweight async client |
@@ -28,13 +29,24 @@ Part of the [RknDEV1](https://github.com/RknDEV1) toolkit stack, used by [swift-
 .package(url: "https://github.com/RknDEV1/swift-toolkit.git", branch: "main")
 ```
 
-## Example
+## Usage — Biometrics + Secure Storage
 
 ```swift
-Formatters.currency(19.90)
-Validator.isValidCPF("390.533.447-05")
-try KeychainHelper.save("token", forKey: "auth")
-let debouncer = Debouncer(delay: 0.4)
+// Check availability
+if BiometricAuth.isAvailable {
+    print("Usando \(BiometricAuth.typeName)")
+}
+
+// Authenticate
+let success = try await BiometricAuth.authenticate(
+    reason: "Confirme sua identidade para continuar"
+)
+
+// Store with biometric protection
+try SecureStorage.saveWithBiometrics("token-secreto", forKey: "auth")
+
+// Read (system prompts Face ID / Touch ID)
+let token = try SecureStorage.loadWithBiometrics(forKey: "auth")
 ```
 
 ## License
